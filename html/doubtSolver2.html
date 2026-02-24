@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DOUBT SOLVER | Peer Doubt Swap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/doubtSolver2.css">
+    </head>
+    <body>
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="header-left">
+                <img src="../images/logo.png" alt="Logo">
+                <span>Peer Doubt Swap</span>
+            </div>
+            <div class="points">
+                ⭐ <span id="star-count">0</span>
+            </div>
+        </div>
+
+        <!-- ===== SUBJECT ===== -->
+        <div class="subject-banner">
+            <h2 id="display-here">No Subject Selected</h2>
+        </div>
+
+        <!-- ===== QUESTION ===== -->
+        <div class="question-section">
+            <p class="question-title">DOUBT DETAILS</p>
+            <div class="question-box" id="display-question">Loading Question...</div>
+        </div>
+
+        <!-- ===== COMMENT SECTION ===== -->
+        <div class="comment-section">
+            <h3>SOLUTIONS / COMMENTS</h3>
+            <textarea id="new-comment" class="comment-input" placeholder="Write a solution or comment..."></textarea>
+            <button onclick="addComment()" class="post-button">Post Comment</button>
+            <ul id="comment-list" class="comment-list"></ul>
+        </div>
+        <script src="../js/doubtSolver2.js"></script>
+    </body>
+</html>

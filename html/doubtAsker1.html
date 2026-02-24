@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOUBT ASKER | Peer Doubt Swap</title>
+    <link rel="stylesheet" href="../css/doubtAsker1.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div class="header-left">
+            <img src="../images/logo.png" alt="Logo">
+            <span>Peer Doubt Swap</span>
+        </div>
+        <div class="points">
+            ⭐ <span id="star-count">0</span>
+        </div>
+    </div>
+
+    <!-- ===== SUBJECT ===== -->
+    <div class="subject-banner">
+        <h2 id="display-here">No Subject Selected</h2>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+        <div class="difficulty-section">
+            <label for="difficulty-select">Difficulty Level:</label>
+            <select id="difficulty-select" class="difficulty-select" required>
+                <option value="">-- Select Difficulty --</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+
+        <div class="input-section">
+            <div class="text_area">
+                <textarea id="user-input" placeholder="Type your doubt here..."></textarea>
+            </div>
+        </div>
+
+        <button onclick="postDoubt()" class="post-button">POST DOUBT</button>
+    </div>
+
+    <!-- ===== POSTED DOUBTS ===== -->
+    <div class="posted-doubts-section">
+        <p class="posted-doubts-title">POSTED DOUBTS</p>
+        <div id="posted-doubts-list"></div>
+    </div>
+
+    <script src="../js/doubtAsker1.js"></script>
+</body>
+</html>

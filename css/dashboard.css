@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f4f7fc;
+  min-height: 100vh;
+}
+
+/* ===== HEADER (SAME AS SUBJECT PAGE) ===== */
+.header {
+  background: #0d5bd9;
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left img {
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;
+  background: white;
+  padding: 4px;
+}
+
+.header-left span {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.points {
+  background: white;
+  color: #0d5bd9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ===== SUBJECT DISPLAY ===== */
+.subject-banner {
+  margin: 40px auto 20px;
+  width: 80%;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+#subjectTitle {
+  font-size: 26px;
+  color: #0d5bd9;
+  font-weight: 600;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.dashboard-actions {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.action-btn {
+  width: 220px;
+  padding: 18px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.asker {
+  background: #4caf50;
+  color: white;
+}
+
+.asker:hover {
+  background: #3e8e41;
+}
+
+.solver {
+  background: #ff9800;
+  color: white;
+}
+
+.solver:hover {
+  background: #e68900;
+}
+

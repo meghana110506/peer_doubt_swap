@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #f4f7fc;
+    min-height: 100vh;
+}
+
+/* ===== HEADER (SAME AS DASHBOARD) ===== */
+.header {
+    background: #0d5bd9;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-left img {
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    background: white;
+    padding: 4px;
+}
+
+.header-left span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.points {
+    background: white;
+    color: #0d5bd9;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ===== SUBJECT DISPLAY ===== */
+.subject-banner {
+    margin: 40px auto 20px;
+    width: 80%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+#display-here {
+    font-size: 26px;
+    color: #0d5bd9;
+    font-weight: 600;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    width: 80%;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.input-section {
+    margin-bottom: 25px;
+}
+
+.difficulty-section {
+    margin-bottom: 20px;
+}
+
+.difficulty-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.difficulty-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: #0d5bd9;
+}
+
+.text_area {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#user-input {
+    width: 100%;
+    height: 200px;
+    border: 2px solid #ddd;
+    padding: 15px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+#user-input:focus {
+    border-color: #38a169;
+}
+
+.post-button {
+    width: 100%;
+    padding: 15px 30px;
+    background-color: #38a169;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.post-button:hover {
+    background-color: #2f855a;
+}
+
+/* ===== POSTED DOUBTS SECTION ===== */
+.posted-doubts-section {
+    width: 80%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.posted-doubts-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#posted-doubts-list {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.doubt-box {
+    background-color: #eeeeee;
+    border-left: 5px solid #38a169;
+    padding: 15px;
+    margin: 10px 0;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.doubt-box:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.01);
+}
+

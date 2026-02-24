@@ -1,0 +1,116 @@
+/* Same font as welcome login page */
+body {
+  background: linear-gradient(to right, #eef3f8, #f8fbff);
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* TOP HEADER */
+.app-header {
+  background-color: #0d6efd;
+  /* Bootstrap primary blue, slightly brighter per screenshot */
+  padding: 15px 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+  font-size: 24px;
+  /* Slightly larger */
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.app-logo {
+  height: 40px;
+}
+
+/* FORM CARD */
+.form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* Softer shadow */
+  padding: 40px;
+  border: 1px solid #eef2f7;
+}
+
+/* HEADINGS */
+h3.text-center {
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  margin-bottom: 30px !important;
+}
+
+.section-title {
+  color: #0d6efd;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eef2f7;
+  padding-bottom: 8px;
+}
+
+/* LABELS & INPUTS */
+.form-label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+.form-control:focus {
+  border-color: #8bb9fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.btn-primary {
+  padding: 10px 40px;
+  font-weight: 600;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* PASSWORD TOGGLE */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper .form-control {
+  padding-right: 40px;
+  /* Space for the icon */
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+
+.password-toggle:hover {
+  color: #0d6efd;
+}

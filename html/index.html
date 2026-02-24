@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Swap Board - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+    <main class="login-container">
+        <div class="login-card">
+            <div class="logo-wrapper">
+                <img src="../images/logo.png" alt="Peer Swap Board Logo" class="logo">
+            </div>
+            <h1>Welcome to Peer Doubt Swap Board</h1>
+            <form class="login-form">
+                <div class="input-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="username">User Name</label>
+                     <input type="text" id="username" name="username" placeholder="Enter your username" pattern="[A-Za-z0-9_]{6,}" title="Minimum 6 characters. Letters, numbers, underscore only."required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <div id="password-feedback" style="font-size: 0.8rem; margin-top: 5px; font-weight: 600;"></div>
+                </div>
+                
+      
+                <div class="forgot-link-container">
+                    <a href="forgetPassword.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="SignIn()">Sign-In</button>
+                    <button type="button" class="btn btn-primary" onclick="handleLogin()">Submit</button>
+                </div>
+            </form>
+
+            <script src="../js/index.js"></script>
+        </div>
+    </main>
+</body>
+</html>
