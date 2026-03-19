@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peer Doubt Swap - Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/signin.css">
+
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header d-flex justify-content-between align-items-center">
+    <div class="app-title">Peer Doubt Swap</div>
+    <img src="../images/logo.png" alt="Logo" class="app-logo">
+  </header>
+
+  <!-- FORM -->
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="form-card">
+
+          <h3 class="text-center mb-4">SIGN-IN PAGE</h3>
+
+          <form id="signupForm" class="needs-validation" novalidate>
+
+            <!-- PERSONAL DETAILS -->
+            <h5 class="section-title">Personal Details</h5>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label>First Name</label>
+                <input type="text" class="form-control" id="firstName" pattern="^[A-Za-z]+$"
+                  onkeydown="return allowOnlyLetters(event)" onpaste="return preventNonLetterPaste(event)" required>
+                <div class="invalid-feedback">Letters only, no spaces.</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Last Name</label>
+                <input type="text" class="form-control" id="lastName" pattern="^[A-Za-z]+$"
+                  onkeydown="return allowOnlyLetters(event)" onpaste="return preventNonLetterPaste(event)" required>
+                <div class="invalid-feedback">Letters only, no spaces.</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" class="form-control" onkeydown="return allowUsernameChars(event)"
+                onpaste="return preventInvalidUsernamePaste(event)" required>
+              <div class="invalid-feedback">
+                Min 6 characters. Must contain at least one letter and one number. Underscore is optional.
+              </div>
+              <div id="error-username" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label>Email</label>
+              <input type="email" class="form-control" id="email" onkeydown="return preventSpaces(event)"
+                onpaste="return preventSpacePaste(event)" required>
+              <div id="error-email" class="invalid-feedback"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label>Date of Birth</label>
+                <input type="date" id="dob" class="form-control" required>
+                <div id="error-dob" class="invalid-feedback"></div>
+                <script>
+                  (function () {
+                    var d = new Date();
+                    d.setFullYear(d.getFullYear() - 15);
+                    document.getElementById('dob').max = d.toISOString().split('T')[0];
+                  })();
+                </script>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Gender</label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" required>
+                  <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender">
+                  <label class="form-check-label">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender">
+                  <label class="form-check-label">Other</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="mb-3">
+              <label>Are you a Student?</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="student" value="yes" required>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="student" value="no">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <!-- ACADEMIC DETAILS -->
+            <div id="academicSection" style="display: none;">
+              <h5 class="section-title">Academic Details</h5>
+
+              <div class="mb-3">
+                <label>College Name</label>
+                <div class="college-search-wrap" style="position:relative;">
+                  <input type="text" class="form-control" id="collegeSearch" autocomplete="off"
+                    placeholder="Search or type your college..." oninput="filterColleges()" onfocus="showCollegeList()">
+                  <input type="hidden" id="collegeName">
+                  <div id="collegeDropdown" class="college-dropdown"
+                    style="display:none; position:absolute; top:100%; left:0; right:0; max-height:220px; overflow-y:auto; background:#fff; border:1px solid #dee2e6; border-top:none; border-radius:0 0 8px 8px; z-index:50; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
+                  </div>
+                </div>
+                <input type="text" class="form-control mt-2" id="collegeOther" placeholder="Type your college name..."
+                  style="display:none;" onkeydown="return allowCollegeName(event)"
+                  onpaste="return preventInvalidCollegePaste(event)">
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Passout Year</label>
+                  <select class="form-select" id="passoutYear" required>
+                    <option value="">-- Select Year --</option>
+                    <option>2030</option>
+                    <option>2029</option>
+                    <option>2028</option>
+                    <option>2027</option>
+                    <option>2026</option>
+                    <option>2025</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label>Branch</label>
+                  <select class="form-select" id="branch" required>
+                    <option value="">-- Select Branch --</option>
+                    <!-- Core Branches -->
+                    <option>Computer Science and Engineering (CSE)</option>
+                    <option>Computer Science (Artificial Intelligence and Machine Learning)</option>
+                    <option>Computer Science (Data Science)</option>
+                    <option>Computer Science (Cyber Security)</option>
+                    <option>Information Technology (IT)</option>
+                    <option>Electronics and Communication Engineering (ECE)</option>
+                    <option>Electrical Engineering (EE)</option>
+                    <option>Electrical and Electronics Engineering (EEE)</option>
+                    <option>Mechanical Engineering (ME)</option>
+                    <option>Civil Engineering (CE)</option>
+                    <option>Chemical Engineering</option>
+                    <!-- Specialized Branches -->
+                    <option>Aerospace Engineering</option>
+                    <option>Pharmaceutical Engineering</option>
+                    <option>Engineering Physics</option>
+                    <option>IT (Business Informatics)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label>Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="password" class="form-control" onkeydown="return preventSpaces(event)"
+                  required>
+                <button type="button" class="password-toggle" onclick="togglePassword('password', this)"
+                  aria-label="Show password">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                    <path
+                      d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+                  </svg>
+                </button>
+              </div>
+              <small class="text-muted">
+                Min 8 chars, include Uppercase, Lowercase, Number & Special character
+              </small>
+              <div id="error-password" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label>Retype Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="confirmPassword" class="form-control" onkeydown="return preventSpaces(event)"
+                  required>
+                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)"
+                  aria-label="Show password">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                    <path
+                      d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+                  </svg>
+                </button>
+              </div>
+              <div id="error-confirm" class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" required>
+              <label class="form-check-label">
+                I agree to the terms & conditions
+              </label>
+            </div>
+
+            <div class="text-center">
+
+              <button type="submit" class="btn btn-primary px-5">SIGN-IN</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/api.js"></script>
+  <script src="../js/signin.js"></script>
+</body>
+
+</html>

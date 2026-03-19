@@ -1,0 +1,221 @@
+/* Global Styles */
+:root {
+    --primary-color: #0056b3;
+    /* Blue button */
+    --secondary-color: #ff8c00;
+    /* Orange outline button */
+    --background-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --text-muted: #666666;
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Page background */
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, #e0eaec 0%, #f4f7f6 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container */
+.login-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Card */
+.login-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 460px;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+/* Logo */
+.logo-wrapper {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Heading */
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+/* Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Input group */
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.12);
+}
+
+/* Forgot password */
+.forgot-link-container {
+    text-align: right;
+    margin-top: -5px;
+}
+
+.forgot-link {
+    font-size: 0.85rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+.sign-in-with-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.small-helper-text {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    color: var(--text-muted);
+    text-align: left;
+    user-select: none;
+}
+
+/* Common button */
+.btn {
+    flex: 1;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-speed);
+}
+
+/* Orange outline button (Sign-In) */
+.btn-secondary {
+    background: #fff;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+/* Blue filled button (Submit) */
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #004494;
+    box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3);
+}
+
+/* Password wrapper with eye toggle */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 42px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: color var(--transition-speed);
+}
+
+.password-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 22px;
+    }
+
+    h1 {
+        font-size: 1.35rem;
+    }
+}
