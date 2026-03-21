@@ -76,20 +76,36 @@ router.post('/register', async (req, res) => {
 // ── POST /api/auth/login ────────────────────────────────────────────────────
 router.post('/login', async (req, res) => {
   try {
-    const { email, username, password } = req.body;
+    const email = (req.body.email || '').trim();
+    const username = (req.body.username || '').trim();
+    const password = req.body.password || '';
 
-    if (!email || !username || !password) {
-      return res.status(400).json({ error: 'Please fill in all fields.' });
+    if (!password || (!email && !username)) {
+      return res.status(400).json({ error: 'Please provide password and email or username.' });
     }
 
-    // Find user by email AND username
-    const [rows] = await pool.query(
-      'SELECT * FROM users WHERE email = ? AND username = ?',
-      [email, username]
-    );
+    let rows = [];
+
+    if (email && username) {
+      // Use both identifiers when provided, but compare case-insensitively.
+      [rows] = await pool.query(
+        'SELECT * FROM users WHERE LOWER(email) = LOWER(?) AND LOWER(username) = LOWER(?)',
+        [email, username]
+      );
+    } else if (email) {
+      [rows] = await pool.query(
+        'SELECT * FROM users WHERE LOWER(email) = LOWER(?)',
+        [email]
+      );
+    } else {
+      [rows] = await pool.query(
+        'SELECT * FROM users WHERE LOWER(username) = LOWER(?)',
+        [username]
+      );
+    }
 
     if (rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid email or username.' });
+      return res.status(401).json({ error: 'No account found for the provided credentials.' });
     }
 
     const user = rows[0];

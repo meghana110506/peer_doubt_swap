@@ -21,7 +21,7 @@ async function handleLogin() {
     });
     
     const data = await response.json();
-    if (submitBtn) { submitBtn.innerText = 'Submit'; submitBtn.disabled = false; }
+    if (submitBtn) { submitBtn.innerText = 'Login'; submitBtn.disabled = false; }
     
     if (!response.ok) {
       feedback.style.color = 'red';

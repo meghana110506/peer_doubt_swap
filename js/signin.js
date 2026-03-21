@@ -190,23 +190,26 @@ function filterColleges() {
 }
 
 function selectCollege(name) {
-  const searchInput = document.getElementById('collegeSearch');
-  const hiddenInput = document.getElementById('collegeName');
-  const otherInput = document.getElementById('collegeOther');
+  const searchInput = collegeSearchInput;
+  const hiddenInput = collegeHiddenInput;
+  const otherInput = collegeOtherInput;
   const dropdown = document.getElementById('collegeDropdown');
 
   dropdown.style.display = 'none';
+  searchInput.setCustomValidity('');
 
   if (name === 'Others') {
     searchInput.value = 'Others';
     hiddenInput.value = '';
     otherInput.style.display = 'block';
+    otherInput.required = true;
     otherInput.focus();
     otherInput.oninput = () => { hiddenInput.value = otherInput.value; };
   } else {
     searchInput.value = name;
     hiddenInput.value = name;
     otherInput.style.display = 'none';
+    otherInput.required = false;
     otherInput.value = '';
   }
 }
@@ -223,16 +226,39 @@ document.addEventListener('click', function (e) {
 // ── Student toggle ──────────────────────────────────────────────────────────
 const studentRadios = document.querySelectorAll('input[name="student"]');
 const academicSection = document.getElementById('academicSection');
-const academicInputs = academicSection.querySelectorAll('input, select');
+const collegeSearchInput = document.getElementById('collegeSearch');
+const collegeHiddenInput = document.getElementById('collegeName');
+const collegeOtherInput = document.getElementById('collegeOther');
+const passoutYearInput = document.getElementById('passoutYear');
+const branchInput = document.getElementById('branch');
+
+// Keep hidden academic fields non-blocking until "Yes" is selected.
+academicSection.style.display = 'none';
+collegeSearchInput.required = false;
+collegeOtherInput.required = false;
+passoutYearInput.required = false;
+branchInput.required = false;
 
 studentRadios.forEach(radio => {
   radio.addEventListener('change', function () {
     if (this.value === 'yes') {
       academicSection.style.display = 'block';
-      academicInputs.forEach(i => i.required = true);
+      collegeSearchInput.required = true;
+      passoutYearInput.required = true;
+      branchInput.required = true;
     } else {
       academicSection.style.display = 'none';
-      academicInputs.forEach(i => { i.required = false; i.value = ''; });
+      collegeSearchInput.required = false;
+      collegeSearchInput.value = '';
+      collegeSearchInput.setCustomValidity('');
+      collegeHiddenInput.value = '';
+      collegeOtherInput.required = false;
+      collegeOtherInput.style.display = 'none';
+      collegeOtherInput.value = '';
+      passoutYearInput.required = false;
+      passoutYearInput.value = '';
+      branchInput.required = false;
+      branchInput.value = '';
     }
   });
 });
@@ -276,6 +302,20 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   event.preventDefault();
   clearErrors();
 
+  const studentEl = document.querySelector('input[name="student"]:checked');
+  const isStudentSelected = studentEl && studentEl.value === 'yes';
+
+  if (isStudentSelected) {
+    const resolvedCollegeName = (collegeHiddenInput.value || '').trim();
+    if (!resolvedCollegeName) {
+      collegeSearchInput.setCustomValidity('Please select your college or choose Others and type it.');
+    } else {
+      collegeSearchInput.setCustomValidity('');
+    }
+  } else {
+    collegeSearchInput.setCustomValidity('');
+  }
+
   if (!this.checkValidity()) {
     event.stopPropagation();
     this.classList.add('was-validated');
@@ -293,7 +333,6 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   const genderEl = document.querySelector('input[name="gender"]:checked');
   const gender = genderEl ? genderEl.value : '';
 
-  const studentEl = document.querySelector('input[name="student"]:checked');
   const is_student = studentEl && studentEl.value === 'yes' ? true : false;
   
   const college_name = document.getElementById('collegeName').value.trim();
