@@ -164,9 +164,13 @@ function showCollegeList() {
 }
 
 function filterColleges() {
-  const query = document.getElementById('collegeSearch').value.toLowerCase();
+  const searchInput = document.getElementById('collegeSearch');
+  const hiddenInput = document.getElementById('collegeName');
+  const query = searchInput.value.toLowerCase();
   const dropdown = document.getElementById('collegeDropdown');
   dropdown.innerHTML = '';
+  hiddenInput.value = searchInput.value.trim();
+  searchInput.setCustomValidity('');
 
   const filtered = COLLEGES.filter(c => c.toLowerCase().includes(query));
 
@@ -277,6 +281,27 @@ function clearErrors() {
     });
 }
 
+function setFormStatus(msg, isError = false) {
+  const el = document.getElementById('form-status');
+  if (!el) return;
+  el.style.color = isError ? '#dc2626' : '#15803d';
+  el.innerText = msg || '';
+}
+
+function triggerSignupSubmit(event) {
+  if (event) event.preventDefault();
+  const form = document.getElementById('signupForm');
+  if (!form) return;
+  setFormStatus('Button clicked. Validating...');
+  if (typeof form.requestSubmit === 'function') {
+    form.requestSubmit();
+  } else {
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+  }
+}
+
+window.triggerSignupSubmit = triggerSignupSubmit;
+
 // ── Password toggle ─────────────────────────────────────────────────────────
 function togglePassword(inputId, btn) {
   const input = document.getElementById(inputId);
@@ -301,12 +326,13 @@ function togglePassword(inputId, btn) {
 document.getElementById('signupForm').addEventListener('submit', async function (event) {
   event.preventDefault();
   clearErrors();
+  setFormStatus('');
 
   const studentEl = document.querySelector('input[name="student"]:checked');
   const isStudentSelected = studentEl && studentEl.value === 'yes';
 
   if (isStudentSelected) {
-    const resolvedCollegeName = (collegeHiddenInput.value || '').trim();
+    const resolvedCollegeName = (collegeHiddenInput.value || collegeSearchInput.value || '').trim();
     if (!resolvedCollegeName) {
       collegeSearchInput.setCustomValidity('Please select your college or choose Others and type it.');
     } else {
@@ -319,6 +345,9 @@ document.getElementById('signupForm').addEventListener('submit', async function 
   if (!this.checkValidity()) {
     event.stopPropagation();
     this.classList.add('was-validated');
+    const firstInvalid = this.querySelector(':invalid');
+    if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setFormStatus('Please fix highlighted fields and try again.', true);
     return;
   }
 
@@ -335,7 +364,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
 
   const is_student = studentEl && studentEl.value === 'yes' ? true : false;
   
-  const college_name = document.getElementById('collegeName').value.trim();
+  const college_name = (collegeHiddenInput.value || collegeSearchInput.value || '').trim();
   const passout_year = document.getElementById('passoutYear').value;
   const branch = document.getElementById('branch').value;
 
@@ -369,6 +398,7 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const originalBtnText = submitBtn.innerText;
     submitBtn.innerText = 'Registering...';
     submitBtn.disabled = true;
+    setFormStatus('Submitting details...');
 
     const response = await fetch('/api/auth/register', {
       method: 'POST',
@@ -382,33 +412,37 @@ document.getElementById('signupForm').addEventListener('submit', async function 
     const data = await response.json();
 
     if (!response.ok) {
-      alert('Error: ' + (data.error || 'Registration failed.'));
+      setFormStatus(data.error || 'Registration failed.', true);
       submitBtn.innerText = originalBtnText;
       submitBtn.disabled = false;
       return;
     }
 
     // ── Store session & redirect ──────────────────────────────────────────
-    sessionStorage.setItem('pds_username', data.user.username);
-    sessionStorage.setItem('pds_token', data.token);
-    sessionStorage.setItem('pds_stars', data.user.stars);
-    sessionStorage.setItem('pds_level', data.user.level);
-    sessionStorage.setItem('pds_first_name', data.user.first_name);
-    sessionStorage.setItem('pds_last_name', data.user.last_name || '');
-    sessionStorage.setItem('pds_email', data.user.email);
-    sessionStorage.setItem('pds_dob', data.user.dob || '');
-    sessionStorage.setItem('pds_gender', data.user.gender || '');
-    sessionStorage.setItem('pds_is_student', data.user.is_student || false);
-    sessionStorage.setItem('pds_college_name', data.user.college_name || '');
-    sessionStorage.setItem('pds_passout_year', data.user.passout_year || '');
-    sessionStorage.setItem('pds_branch', data.user.branch || '');
+    try {
+      sessionStorage.setItem('pds_username', data.user.username);
+      sessionStorage.setItem('pds_token', data.token);
+      sessionStorage.setItem('pds_stars', data.user.stars);
+      sessionStorage.setItem('pds_level', data.user.level);
+      sessionStorage.setItem('pds_first_name', data.user.first_name);
+      sessionStorage.setItem('pds_last_name', data.user.last_name || '');
+      sessionStorage.setItem('pds_email', data.user.email);
+      sessionStorage.setItem('pds_dob', data.user.dob || '');
+      sessionStorage.setItem('pds_gender', data.user.gender || '');
+      sessionStorage.setItem('pds_is_student', data.user.is_student || false);
+      sessionStorage.setItem('pds_college_name', data.user.college_name || '');
+      sessionStorage.setItem('pds_passout_year', data.user.passout_year || '');
+      sessionStorage.setItem('pds_branch', data.user.branch || '');
+    } catch (storageErr) {
+      console.warn('Session storage unavailable:', storageErr);
+    }
 
-    alert('Registration Successful! Welcome, ' + username + '!');
-    window.location.href = 'index.html';
+    setFormStatus('Registration successful! Redirecting...');
+    window.location.assign('/html/index.html');
 
   } catch (error) {
     console.error('Registration API error:', error);
-    alert('An error occurred connecting to the server. Make sure the backend is running.');
+    setFormStatus('Could not connect to server. Please try again.', true);
     const submitBtn = this.querySelector('button[type="submit"]');
     submitBtn.innerText = 'SIGN-IN';
     submitBtn.disabled = false;
